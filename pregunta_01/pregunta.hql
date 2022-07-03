@@ -14,7 +14,12 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DROP TABLE IF EXISTS tabla_de_datos;
+CREATE TABLE tabla_de_datos (letter STRING, dates DATE, number INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
 LOAD DATA LOCAL INPATH 'data.tsv' OVERWRITE INTO TABLE tabla_de_datos;
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
 INSERT OVERWRITE DIRECTORY './output'
 SELECT 1 AS letter, COUNT(*) AS freq FROM tabla_de_datos GROUP BY 1 ORDER BY letter DESC;
+
