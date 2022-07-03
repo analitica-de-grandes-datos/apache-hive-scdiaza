@@ -21,5 +21,4 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 LOAD DATA LOCAL INPATH 'data.tsv' OVERWRITE INTO TABLE tabla_de_datos;
 
 INSERT OVERWRITE DIRECTORY './output'
-SELECT 1 AS letter, COUNT(*) AS freq FROM tabla_de_datos GROUP BY 1 ORDER BY letter DESC;
-
+SELECT letter, COUNT(letter) AS freq FROM tabla_de_datos GROUP BY letter ORDER BY letter DESC;
