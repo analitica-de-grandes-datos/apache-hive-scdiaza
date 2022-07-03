@@ -14,14 +14,11 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
 */
 
 DROP TABLE IF EXISTS tabla_2;
-CREATE TABLE tbl0 (
+CREATE TABLE  tabla_2 (
     letra STRING,
     fecha DATE,
     valor INT)
-ROW FORMAT DELIMITED 
-FIELDS TERMINATED BY '\t'
-LINES TERMINATED BY '\n';
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE tabla_2;
-
 INSERT OVERWRITE DIRECTORY './output'
 SELECT * FROM tabla_2, ORDER BY 1,3;
