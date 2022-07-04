@@ -51,7 +51,10 @@ FIELDS TERMINATED BY ','
 COLLECTION ITEMS TERMINATED BY ','
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
-SELECT c4, c5, count(c5)
-FROM tbl0
-GROUP BY c5, YEAR(c4)
-SORT BY YEAR(c4), c5;
+
+SELECT  year, col_5, count(*)
+FROM 
+    SELECT YEAR(c4) as year, c5 as col_5
+    FROM tbl0
+GROUP BY year, col_5
+SORT BY year, col_5;
