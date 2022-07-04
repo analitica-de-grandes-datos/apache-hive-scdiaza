@@ -44,6 +44,6 @@ FROM
 (
     SELECT  c2[0] as array_leter, map_keys(c3) as map_value
     FROM t0
-)
+) t2
 GROUP BY array_leter, map_value
 SORT BY array_leter, map_value;
