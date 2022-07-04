@@ -36,7 +36,7 @@ FIELDS TERMINATED BY ','
 COLLECTION ITEMS TERMINATED BY ':'
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
-SELECT map_keys(c3), count(*)
+SELECT map_keys(c3) as llave, count(*)
 FROM tbl0,
-GROUP BY map_keys(c3)
-SORT BY map_keys(c3);
+GROUP BY llave
+SORT BY llave;
