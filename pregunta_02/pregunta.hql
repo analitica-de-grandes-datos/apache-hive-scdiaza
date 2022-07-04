@@ -13,4 +13,15 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DROP TABLE IF EXISTS tabla_2;
+CREATE TABLE  tabla_2 (
+    letra STRING,
+    fecha DATE,
+    valor INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
+LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE tabla_2;
+
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM tabla_2 ORDER BY letra, valor, fecha;
