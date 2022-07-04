@@ -42,6 +42,7 @@ MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n';
 LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 
+
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
@@ -52,5 +53,5 @@ FIELDS TERMINATED BY ','
 COLLECTION ITEMS TERMINATED BY ':'
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
-SELECT a.c1, map_values(b.c4)
-FROM tbl0 a LEFT JOIN tbl1 b ON(a.c2=map_keys(b.c4));
+SELECT t1.c1,t1.c2,t2.c4[t1.c2]
+FROM tbl0 t1 JOIN tbl1 t2 ON(t1.c1 = t2.c1);
