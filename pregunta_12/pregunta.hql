@@ -34,11 +34,11 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 
 CREATE TABLE data AS
-SELECT Letras, key, value
-FROM (SELECT Letras, c3 FROM t0 LATERAL VIEW EXPLODE(c2) t0 AS Letras) data1
+SELECT letras, key, value
+FROM (SELECT letras, c3 FROM t0 LATERAL VIEW EXPLODE(c2) t0 AS letras) data1
 LATERAL VIEW EXPLODE(c3) data1;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-SELECT Letras, key, COUNT(1)
-FROM data GROUP BY Letras, key;
+SELECT letras, key, COUNT(1)
+FROM data GROUP BY letras, key;
