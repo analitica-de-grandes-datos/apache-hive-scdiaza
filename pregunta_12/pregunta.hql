@@ -39,8 +39,11 @@ FIELDS TERMINATED BY ','
 COLLECTION ITEMS TERMINATED BY ':'
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
-SELECT c2[0], map_keys(c3), count(*)
-FROM t0
-GROUP BY c2[0], map_keys(c3)
-SORT BY c2[0], map_keys(c3);
-
+SELECT array_leter, map_value, count(*)
+FROM
+(
+    SELECT  c2[0] as array_leter, map_keys(c3) as map_value
+    FROM t0
+)
+GROUP BY array_leter, map_value
+SORT BY array_leter, map_value;
