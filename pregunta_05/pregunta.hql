@@ -45,3 +45,24 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+DROP TABLE IF EXISTS tbl0;
+DROP TABLE IF EXISTS count_value;
+CREATE TABLE tbl0 (
+    c1 INT,
+    c2 STRING,
+    c3 INT,
+    c4 STRING,
+    c5 ARRAY<CHAR(1)>, 
+    c6 MAP<STRING, INT>
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+COLLECTION ITEMS TERMINATED BY ':'
+MAP KEYS TERMINATED BY '#'
+LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INPATH 'data0.csv' INTO TABLE tbl0;
+
+CREATE TABLE count_value AS SELECT (YEAR(c4)) ano, letter FROM tbl0 LATERAL VIEW explode(c5) letter_list as letter;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT ano, letter, COUNT(1) cant FROM count_value GROUP BY ano, letter ORDER BY ano, letter ASC;
