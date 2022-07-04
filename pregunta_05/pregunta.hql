@@ -54,7 +54,9 @@ LINES TERMINATED BY '\n'
 
 SELECT  year, col_5, count(*)
 FROM 
+(
     SELECT YEAR(c4) as year, c5 as col_5
     FROM tbl0
+ )
 GROUP BY year, col_5
 SORT BY year, col_5;
