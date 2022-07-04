@@ -37,6 +37,6 @@ COLLECTION ITEMS TERMINATED BY ':'
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
 SELECT map_keys(c3) as llave, count(*)
-FROM tbl0,
+FROM tbl0
 GROUP BY llave
 SORT BY llave;
