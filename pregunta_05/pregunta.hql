@@ -45,18 +45,3 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
-INSERT OVERWRITE LOCAL DIRECTORY 'output'
-ROW FORMAT DELIMITED 
-FIELDS TERMINATED BY ','
-COLLECTION ITEMS TERMINATED BY ','
-MAP KEYS TERMINATED BY '#'
-LINES TERMINATED BY '\n'
-
-SELECT  year, col_5, count(*)
-FROM 
-(
-    SELECT YEAR(c4) as year, c5 as col_5
-    FROM tbl0
- ) t2
-GROUP BY year, col_5
-SORT BY year, col_5;
