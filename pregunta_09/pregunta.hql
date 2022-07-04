@@ -46,3 +46,11 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+INSERT OVERWRITE LOCAL DIRECTORY 'output'
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','
+COLLECTION ITEMS TERMINATED BY ':'
+MAP KEYS TERMINATED BY '#'
+LINES TERMINATED BY '\n'
+SELECT a.c1, map_values(b.c4)
+FROM tbl0 a left_join tbl1 b ON(a.c2=map_keys(b.c4));
