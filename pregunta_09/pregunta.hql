@@ -53,4 +53,4 @@ COLLECTION ITEMS TERMINATED BY ':'
 MAP KEYS TERMINATED BY '#'
 LINES TERMINATED BY '\n'
 SELECT a.c1, map_values(b.c4)
-FROM tbl0 a left_join tbl1 b ON(a.c2=map_keys(b.c4));
+FROM tbl0 a LEFT JOIN tbl1 b ON(a.c2=map_keys(b.c4));
