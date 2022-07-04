@@ -33,17 +33,13 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
-INSERT OVERWRITE LOCAL DIRECTORY 'output'
-ROW FORMAT DELIMITED 
-FIELDS TERMINATED BY ','
-COLLECTION ITEMS TERMINATED BY ':'
-MAP KEYS TERMINATED BY '#'
-LINES TERMINATED BY '\n'
-SELECT array_leter, map_value, count(*)
-FROM
-(
-    SELECT  c2[0] as array_leter, map_keys(c3) as map_value
-    FROM t0
-) t2
-GROUP BY array_leter, map_value
-SORT BY array_leter, map_value;
+CREATE TABLE ANSW1 AS
+SELECT Lt, key, value
+FROM (SELECT Lt, c3 FROM t0 LATERAL VIEW EXPLODE(c2) t0 AS Lt) Dt2
+LATERAL VIEW EXPLODE(c3) Dt2;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT Lt, key, COUNT(1)
+FROM ANSW1
+GROUP BY Lt, key;
