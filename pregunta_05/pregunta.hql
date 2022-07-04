@@ -57,6 +57,6 @@ FROM
 (
     SELECT YEAR(c4) as year, c5 as col_5
     FROM tbl0
- )
+ ) t2
 GROUP BY year, col_5
 SORT BY year, col_5;
